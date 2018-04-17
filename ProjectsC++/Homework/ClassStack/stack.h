@@ -3,30 +3,40 @@
 class Stack
 {
     int top;
-    int arr[10];
+    int* arr;
+    unsigned int size;
     
 public:
-    Stack()
-    {
+    Stack(unsigned int size) {
+        if(size > 0) {
+            this->size = size;
+            arr = new int[size];
+        } else {
+            std::cout << "Write Correct Size!\n";
+        }
         top = 0;
+    }
+    
+    ~Stack() {
+        delete [] arr;
     }
 
     void print();
     void push(int);
     void clear();
     int pop();
-    int isempty();
-    int isfull();
+    int isEmpty();
+    int isFull();
 };
 
-int Stack::isempty()
+int Stack::isEmpty()
 {
-    return (top == 0 ? 1:0);
+    return (top == 0);
 }
 
-int Stack::isfull()
+int Stack::isFull()
 {
-    return (top == 10 ? 1:0);
+    return (top == 10);
 }
 
 void Stack::clear()
@@ -36,7 +46,7 @@ void Stack::clear()
 
 void Stack::push(int x)
 {
-    if( !isfull() ) {
+    if( !isFull() ) {
         arr[top++] = x;
     } else {
         std::cout << "\nStack overflow error ! Possible Data Loss !\n";
@@ -45,22 +55,21 @@ void Stack::push(int x)
 
 int Stack::pop()
 {
-    if( !isempty() ) {
+    if( !isEmpty() ) {
         std::cout << "\nTop number popped from the stack\n";
-        return( arr[--top] );
+        return arr[--top];
     } else {
         std::cout << "\nStack is empty! What to pop...!\n";
     }
-    return 0;
+    return -1;
 }
 
 void Stack::print()
 {
-    if(!isempty()) {
+    if(!isEmpty()) {
         for(int i = top - 1; i >= 0; i--) {
             std::cout << "| " << arr[i] << "\n";
         }
-        std::cout << "\n";
     } else {
         std::cout << "\nStack is empty!\n";
     }

@@ -2,17 +2,17 @@
 #include "stack.h"
 
 int main() {
-    Stack myStack;
+    Stack myStack(10);
     int ch = 1, num = 0;
     
     while(ch != 0)
     {
         std::cout <<"\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n";
-        std::cout << "Stack Operations Mani Menu\n";
+        std::cout << "Stack Operations Main Menu\n";
         std::cout << "1.Push\n";
         std::cout << "2.Pop\n";
-        std::cout << "3.IsEmpty\n";
-        std::cout << "4.IsFull\n";
+        std::cout << "3.isEmpty\n";
+        std::cout << "4.isFull\n";
         std::cout << "5.Print Stack\n";
         std::cout << "6.Clear Stack\n";
         std::cout << "0.Exit";
@@ -45,14 +45,14 @@ int main() {
                 myStack.pop();
                 break;
             case 3:
-                if(myStack.isempty()) {
+                if(myStack.isEmpty()) {
                         std::cout<<"Stack is empty.\n";
                     } else {
                         std::cout<<"Stack is not empty.\n";
                     }
                 break;
             case 4:
-                if(myStack.isfull()) {
+                if(myStack.isFull()) {
                     std::cout<<"Stack is full.\n";
                 } else {
                     std::cout<<"Stack is not full.\n";
@@ -60,6 +60,7 @@ int main() {
                 break;
             case 5:
                 myStack.print();
+                std::cout << "\n";
                 break;
             case 6:
                 myStack.clear();
