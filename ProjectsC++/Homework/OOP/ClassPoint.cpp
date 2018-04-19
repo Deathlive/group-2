@@ -32,6 +32,13 @@ class Point {
             this->y = y;
         }
         
+        double distanceFrom(Point obj)
+        {
+            double dx = obj.x - x; 
+            double dy = obj.y - y; 
+            return(sqrt((dx*dx)+(dy*dy)));
+        }
+        
         void printPoint() {
             std::cout << " x = "<< x << "  " << "y = " << y;
         }
@@ -39,11 +46,9 @@ class Point {
 
 class Circle: public Point {
     private:
-        Point a;
         double r;
     public:
-        Circle(Point a, double r) {
-            this->a = a;
+        Circle(Point a, double r): Point (a) {
             this->r = r;
         }
         Circle (const Circle &obj): Point(obj)
@@ -68,7 +73,7 @@ class Circle: public Point {
         }
         
         void print() {
-            std::cout << "Circle: (" << a.getX() << " , " << a.getY() << ")\n";
+            std::cout << "Circle: (" << getX() << " , " << getY() << ")\n";
             std::cout << "L = " << getL() << "\n";
             std::cout << "S = " << getS() << "\n";
         }
@@ -78,7 +83,7 @@ class Line: public Point {
     private:
         Point a;
     public:
-        Line(Point a,Point b): Point(b) {
+        Line(Point a, Point b): Point(b) {
             this->a = a;
         }
         Line(const Line &obj): Point(obj)
@@ -91,14 +96,20 @@ class Line: public Point {
         Point getA() {
             return a;
         }
+        Point getB() {
+            return Point(Point::getX(), Point::getY());
+        }
         
         void setA(Point a) {
             this->a = a;
         }
+        void setB(Point b) {
+            Point::setX(b.getX());
+            Point::setY(b.getY());
+        }
         
         double lineLength() {
-            double L = sqrt(pow(a.getX() - getX(), 2) + pow(a.getY() - getY(), 2)); 
-            return L;
+            return a.distanceFrom(getB());
         }
         void printCoordinate() {
             std::cout << "\n";
@@ -128,9 +139,16 @@ class Rectangle: public Point {
         Point getP1() {
             return p1;
         }
+        Point getB() {
+            return Point(Point::getX(), Point::getY());
+        }
         
         void setP1(Point p1) {
             this->p1 = p1;
+        }
+        void setB(Point b) {
+            Point::setX(b.getX());
+            Point::setY(b.getY());
         }
         
         double length() {
@@ -157,19 +175,17 @@ class Rectangle: public Point {
 
 class Triangle: public Point {
     private:
-        Point a, b, c;
+        Point a, b;
     public:
-        Triangle(Point a, Point b, Point c)
+        Triangle(Point a, Point b, Point c): Point(c)
         {
             this->a = a;
             this->b = b;
-            this->c = c;
         }
-        Triangle(const Triangle &obj)
+        Triangle(const Triangle &obj): Point(obj)
         {
             a = obj.a;
             b = obj.b;
-            c = obj.c;
         }
         
         ~Triangle() {}
@@ -180,6 +196,9 @@ class Triangle: public Point {
         Point getB() {
             return b;
         }
+        Point getC() {
+            return Point(Point::getX(), Point::getY());
+        }
         
         void setA(Point a) {
             this->a = a;
@@ -187,17 +206,18 @@ class Triangle: public Point {
         void setB(Point b) {
             this->b = b;
         }
+        void setC(Point c) {
+            Point::setX(c.getX());
+            Point::setY(c.getY());
+        }
         
-        double Length(Point p1, Point p2) {
-            double L = sqrt(pow(p2.getX() - p1.getX(), 2) + pow(p2.getY() - p1.getY(), 2)); 
-            return L;
-        }
         double Area() {
-            double p = (Length(a, b) + Length(b, c) + Length(c, a)) / 2;
-            return std::sqrt(p * (p - Length(a, b)) * (p - Length(b, c)) * (p - Length(c, a)));
+            double p = (a.distanceFrom(b) + b.distanceFrom(getC()) + Point::distanceFrom(a)) / 2;
+            return std::sqrt(p * (p - a.distanceFrom(b)) * (p - b.distanceFrom(getC())) * (p - Point::distanceFrom(a)));
         }
+        
         double Perimeter() {
-            return Length(a, b) + Length(b, c) + Length(c, a);
+            return a.distanceFrom(b) + b.distanceFrom(getC()) + Point::distanceFrom(a);
         }
 };
 
