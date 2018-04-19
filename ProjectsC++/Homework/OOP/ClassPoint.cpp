@@ -39,9 +39,11 @@ class Point {
 
 class Circle: public Point {
     private:
+        Point a;
         double r;
     public:
-        Circle(double x = 0, double y = 0, double r = 1): Point(x, y) {
+        Circle(Point a, double r) {
+            this->a = a;
             this->r = r;
         }
         Circle (const Circle &obj): Point(obj)
@@ -66,7 +68,7 @@ class Circle: public Point {
         }
         
         void print() {
-            std::cout << "Circle: (" << getX() << " , " << getY() << ")\n";
+            std::cout << "Circle: (" << a.getX() << " , " << a.getY() << ")\n";
             std::cout << "L = " << getL() << "\n";
             std::cout << "S = " << getS() << "\n";
         }
@@ -74,44 +76,35 @@ class Circle: public Point {
 
 class Line: public Point {
     private:
-        double a, b;
+        Point a;
     public:
-        Line(double a = 0, double b = 0, double x = 0, double y = 0): Point(x, y) 
-        {
+        Line(Point a,Point b): Point(b) {
             this->a = a;
-            this->b = b;
         }
         Line(const Line &obj): Point(obj)
         {
             a = obj.a;
-            b = obj.b;
         }
         
         ~Line() {}
         
-        double getB() {
-            return b;
-    	}
-        double getA() {
+        Point getA() {
             return a;
         }
         
-        void setA(double a) {
+        void setA(Point a) {
             this->a = a;
         }
-        void setB(double b) {
-            this->b = b;
-        }
         
-        double line_L() {
-            double L = sqrt(pow(getA() - getX(), 2) + pow(getB() - getY(), 2)); 
+        double lineLength() {
+            double L = sqrt(pow(a.getX() - getX(), 2) + pow(a.getY() - getY(), 2)); 
             return L;
         }
-        void foo() {
+        void printCoordinate() {
             std::cout << "\n";
-            double k = (getY() - b) / (getX() - a);
-            for (int i = a + 1; i < x; ++i) {
-                std::cout << "(" << i << " , " << k * (i - a) + b << ")\n";
+            double k = (getY() - a.getY()) / (getX() - a.getX());
+            for (int i = a.getX() + 1; i < x; ++i) {
+                std::cout << "(" << i << " , " << k * (i - a.getX()) + a.getY() << ")\n";
             }
             std::cout << "\n";
         }
@@ -164,70 +157,70 @@ class Rectangle: public Point {
 
 class Triangle: public Point {
     private:
-        double a, b, c;
+        Point a, b, c;
     public:
-        Triangle(double a = 4, double b = 4, double c = 4)
+        Triangle(Point a, Point b, Point c)
         {
             this->a = a;
             this->b = b;
             this->c = c;
-            Point(0, 0);
-            Point(a, 0);
-            Point(a / 2, b);
         }
         Triangle(const Triangle &obj)
         {
             a = obj.a;
             b = obj.b;
             c = obj.c;
-            Point(0, 0);
-            Point(a, 0);
-            Point(a / 2, b);
         }
         
         ~Triangle() {}
         
-        double get_A() {
+        Point getA() {
             return a;
         }
-        double get_B() {
+        Point getB() {
             return b;
         }
-        double get_C() {
-            return c;
-        }
         
-        void set_A(double a) {
+        void setA(Point a) {
             this->a = a;
         }
-        void set_B(double b) {
+        void setB(Point b) {
             this->b = b;
         }
-        void set_C(double c) {
-            this->c = c;
+        
+        double Length(Point p1, Point p2) {
+            double L = sqrt(pow(p2.getX() - p1.getX(), 2) + pow(p2.getY() - p1.getY(), 2)); 
+            return L;
         }
-        double triArea() {
-            double p = (get_A() + get_B() + get_C()) / 2;
-            return sqrt(p * (p - get_A()) * (p - get_B()) * (p - get_C()));
+        double Area() {
+            double p = (Length(a, b) + Length(b, c) + Length(c, a)) / 2;
+            return std::sqrt(p * (p - Length(a, b)) * (p - Length(b, c)) * (p - Length(c, a)));
         }
-        double triPerimeter() {
-            return get_A() + get_B() + get_C(); 
+        double Perimeter() {
+            return Length(a, b) + Length(b, c) + Length(c, a);
         }
 };
 
 int main() {
-    double x1, y1, x2, y2;
-
-    std::cout << "Input x1 : ";
+    double x1, y1, x2, y2, x3, y3, r;
+    std::cout << "Input R: ";
+    std::cin >> r;
+    std::cout << "Input x1: ";
     std::cin >> x1;
-    std::cout << "Input y1 : ";
+    std::cout << "Input y1: ";
     std::cin >> y1;
-    Point p1(x1, y1);
-    std::cout << "Input x2 : ";
+    std::cout << "Input x2: ";
     std::cin >> x2;
-    std::cout << "Input y2 : ";
+    std::cout << "Input y2: ";
     std::cin >> y2;
+    std::cout << "Input x3: ";
+    std::cin >> x3;
+    std::cout << "Input y3: ";
+    std::cin >> y3;
+    
+    Point p1(x1, y1);
     Point p2(x2, y2);
+    Point p3(x3, y3);
     std::cout << "\n";
 
     Rectangle obj1(p1, p2);
@@ -236,17 +229,19 @@ int main() {
     obj1.print();
     std::cout << "\n";
 
-    Circle obj2(x1, y1);
+    Circle obj2(p1, r);
     obj2.print();
     std::cout << "\n";
+    
+    Triangle obj3(p1, p2, p3);
+    std::cout << "Triangle Area(S): " << obj3.Area() << "\n";
+    std::cout << "Triangle Perimeter(P): " << obj3.Perimeter() << "\n\n";
 
-    Triangle obj3;
-    std::cout << "Triangle Area(S): " << obj3.triArea() << "\n";
-    std::cout << "Triangle Perimeter(P): " << obj3.triPerimeter() << "\n";
-
-    Line obj4(x1, y1, x2, y2);
-    std::cout << "\nLine Coordinates";
-    obj4.foo();
+    Line obj4(p1, p2);
+    std::cout << "Line Length: " << obj4.lineLength() << "\n";
+    
+    std::cout << "Line Coordinates";
+    obj4.printCoordinate();
 
     return 0;   
 }
