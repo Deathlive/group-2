@@ -1,7 +1,14 @@
 #include <iostream>
 #include <cmath>
 
-class Point {
+class Shape {
+    public:
+        virtual double getL() = 0;
+        virtual double Area() = 0;
+        virtual double Perimeter() = 0;
+};
+
+class Point: public Shape {
     protected:
         double x, y;
     public:
@@ -38,9 +45,26 @@ class Point {
             double dy = obj.y - y; 
             return(sqrt((dx*dx)+(dy*dy)));
         }
-        
         void printPoint() {
             std::cout << " x = "<< x << "  " << "y = " << y;
+        }
+        virtual double getL() {
+            std::cout << "Point does not have a L: ";
+            return -1;
+        }
+        virtual double Area() {
+            std::cout << "Point does not have a S: ";
+            return -1;
+        }
+        virtual double Perimeter() {
+            std::cout << "Point does not have a P: ";
+            return -1;
+        }
+        void foo() {
+            std::cout << "POINT!\n";
+        }
+        virtual void boo() {
+            std::cout << "Virtual POINT!\n";
         }
 };
 
@@ -64,7 +88,7 @@ class Circle: public Point {
         double getL() {
             return 2 * M_PI * r;
         }
-        double getS() {
+        virtual double Area() {
             return r * r * M_PI;
         }
         
@@ -75,7 +99,13 @@ class Circle: public Point {
         void print() {
             std::cout << "Circle: (" << getX() << " , " << getY() << ")\n";
             std::cout << "L = " << getL() << "\n";
-            std::cout << "S = " << getS() << "\n";
+            std::cout << "S = " << Area() << "\n";
+        }
+        void foo() {
+            std::cout << "CIRCLE!\n";
+        }
+        virtual void boo() {
+            std::cout << "Virtual CIRCLE!\n";
         }
 };
 
@@ -108,7 +138,7 @@ class Line: public Point {
             Point::setY(b.getY());
         }
         
-        double lineLength() {
+        virtual double getL() {
             return a.distanceFrom(getB());
         }
         void printCoordinate() {
@@ -118,6 +148,12 @@ class Line: public Point {
                 std::cout << "(" << i << " , " << k * (i - a.getX()) + a.getY() << ")\n";
             }
             std::cout << "\n";
+        }
+        void foo() {
+            std::cout << "LINE!\n";
+        }
+        virtual void boo() {
+            std::cout << "Virtual LINE!\n";
         }
 };
 
@@ -157,10 +193,10 @@ class Rectangle: public Point {
         double width() {
             return  std::abs( p1.getY() - Point::getY() );
         }
-        double recArea() {
+        virtual double Area() {
             return length() * width();
         }
-        double recPerimeter() {
+        virtual double Perimeter() {
             return 2 * (length() + width());
         }
         void print() {
@@ -170,6 +206,12 @@ class Rectangle: public Point {
                 }
                 std::cout << '\n';
             }
+        }
+        void foo() {
+            std::cout << "RECTANGLE!\n";
+        }
+        virtual void boo() {
+            std::cout << "Virtual RECTANGLE!\n";
         }
 };
 
@@ -211,15 +253,33 @@ class Triangle: public Point {
             Point::setY(c.getY());
         }
         
-        double Area() {
+        virtual double Area() {
             double p = (a.distanceFrom(b) + b.distanceFrom(getC()) + Point::distanceFrom(a)) / 2;
             return std::sqrt(p * (p - a.distanceFrom(b)) * (p - b.distanceFrom(getC())) * (p - Point::distanceFrom(a)));
         }
         
-        double Perimeter() {
+        virtual double Perimeter() {
             return a.distanceFrom(b) + b.distanceFrom(getC()) + Point::distanceFrom(a);
         }
+        void foo() {
+            std::cout << "TRIANGLE!\n";
+        }
+        virtual void boo() {
+            std::cout << "Virtual TRIANGLE!\n";
+        }
 };
+
+void printL(Shape* obj) {
+    std::cout << obj->getL();
+}
+
+void printArea(Shape* obj) {
+    std::cout << obj->Area();
+}
+
+void printPerimeter(Shape* obj) {
+    std::cout << obj->Perimeter();
+}
 
 int main() {
     double x1, y1, x2, y2, x3, y3, r;
@@ -241,27 +301,80 @@ int main() {
     Point p1(x1, y1);
     Point p2(x2, y2);
     Point p3(x3, y3);
+    
     std::cout << "\n";
-
-    Rectangle obj1(p1, p2);
-    std::cout << "Rectangle Area(S): " << obj1.recArea() << "\n";
-    std::cout << "Rectangle Perimeter(P): " << obj1.recPerimeter() <<"\n";
-    obj1.print();
-    std::cout << "\n";
-
+    
     Circle obj2(p1, r);
     obj2.print();
+    
+    std::cout << "\n";
+    
+    Line obj4(p1, p2);
+    std::cout << "Line Length: " << obj4.getL() << "\n";
+    std::cout << "Line Coordinates";
+    obj4.printCoordinate();
+    
+    Rectangle obj1(p1, p2);
+    std::cout << "Rectangle Area(S): " << obj1.Area() << "\n";
+    std::cout << "Rectangle Perimeter(P): " << obj1.Perimeter() <<"\n";
+    obj1.print();
+    
     std::cout << "\n";
     
     Triangle obj3(p1, p2, p3);
     std::cout << "Triangle Area(S): " << obj3.Area() << "\n";
-    std::cout << "Triangle Perimeter(P): " << obj3.Perimeter() << "\n\n";
+    std::cout << "Triangle Perimeter(P): " << obj3.Perimeter() << "\n";
 
-    Line obj4(p1, p2);
-    std::cout << "Line Length: " << obj4.lineLength() << "\n";
+    std::cout << "\n^^^^^*****VIRTUAL SHAPE PRINT*****^^^^^\n\n";
+
+    Point* shp1 = &p1;
+    shp1->foo();
+    shp1->boo();
+    std::cout << "\n"; 
+    printL(&p1);
+    std::cout << "\n"; 
+    printArea(&p1);
+    std::cout << "\n"; 
+    printPerimeter(&p1);
     
-    std::cout << "Line Coordinates";
-    obj4.printCoordinate();
-
+    std::cout << "\n\n";
+    
+    Line* shp2 = &obj4;
+    shp2->foo();
+    shp2->boo();
+    std::cout << "Line Length: ";
+    printL(&obj4);
+    
+    std::cout << "\n\n";
+    
+    Rectangle* shp3 = &obj1;
+    shp3->foo();
+    shp3->boo();
+    std::cout << "Rectangle Area(S): ";
+    printArea(&obj1);
+    std::cout << "\nRectangle Perimeter(P): ";
+    printPerimeter(&obj1);
+    
+    std::cout << "\n\n";
+    
+    Triangle* shp4 = &obj3;
+    shp4->foo();
+    shp4->boo();
+    std::cout << "Triangle Area(S): ";
+    printArea(&obj3);
+    std::cout << "\nTriangle Perimeter(P): ";
+    printPerimeter(&obj3);
+    
+    std::cout << "\n\n";
+    
+    Circle* shp5 = &obj2;
+    shp5->foo();
+    shp5->boo();
+    std::cout << "L = ";
+    printL(&obj2);
+    std::cout << "\nS = ";
+    printArea(&obj2);
+    std::cout << "\n"; 
+    
     return 0;   
 }
