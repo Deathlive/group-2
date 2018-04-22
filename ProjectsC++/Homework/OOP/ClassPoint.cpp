@@ -4,8 +4,8 @@
 class Shape {
     public:
         virtual double getL() = 0;
-        virtual double Area() = 0;
-        virtual double Perimeter() = 0;
+        virtual double getS() = 0;
+        virtual double getP() = 0;
 };
 
 class Point: public Shape {
@@ -52,11 +52,11 @@ class Point: public Shape {
             std::cout << "Point does not have a L: ";
             return -1;
         }
-        virtual double Area() {
+        virtual double getS() {
             std::cout << "Point does not have a S: ";
             return -1;
         }
-        virtual double Perimeter() {
+        virtual double getP() {
             std::cout << "Point does not have a P: ";
             return -1;
         }
@@ -88,7 +88,7 @@ class Circle: public Point {
         double getL() {
             return 2 * M_PI * r;
         }
-        virtual double Area() {
+        virtual double getS() {
             return r * r * M_PI;
         }
         
@@ -99,7 +99,7 @@ class Circle: public Point {
         void print() {
             std::cout << "Circle: (" << getX() << " , " << getY() << ")\n";
             std::cout << "L = " << getL() << "\n";
-            std::cout << "S = " << Area() << "\n";
+            std::cout << "S = " << getS() << "\n";
         }
         void foo() {
             std::cout << "CIRCLE!\n";
@@ -193,10 +193,10 @@ class Rectangle: public Point {
         double width() {
             return  std::abs( p1.getY() - Point::getY() );
         }
-        virtual double Area() {
+        virtual double getS() {
             return length() * width();
         }
-        virtual double Perimeter() {
+        virtual double getP() {
             return 2 * (length() + width());
         }
         void print() {
@@ -253,12 +253,12 @@ class Triangle: public Point {
             Point::setY(c.getY());
         }
         
-        virtual double Area() {
+        virtual double getS() {
             double p = (a.distanceFrom(b) + b.distanceFrom(getC()) + Point::distanceFrom(a)) / 2;
             return std::sqrt(p * (p - a.distanceFrom(b)) * (p - b.distanceFrom(getC())) * (p - Point::distanceFrom(a)));
         }
         
-        virtual double Perimeter() {
+        virtual double getP() {
             return a.distanceFrom(b) + b.distanceFrom(getC()) + Point::distanceFrom(a);
         }
         void foo() {
@@ -273,12 +273,12 @@ void printL(Shape* obj) {
     std::cout << obj->getL();
 }
 
-void printArea(Shape* obj) {
-    std::cout << obj->Area();
+void printgetS(Shape* obj) {
+    std::cout << obj->getS();
 }
 
-void printPerimeter(Shape* obj) {
-    std::cout << obj->Perimeter();
+void printgetP(Shape* obj) {
+    std::cout << obj->getP();
 }
 
 int main() {
@@ -315,27 +315,26 @@ int main() {
     obj4.printCoordinate();
     
     Rectangle obj1(p1, p2);
-    std::cout << "Rectangle Area(S): " << obj1.Area() << "\n";
-    std::cout << "Rectangle Perimeter(P): " << obj1.Perimeter() <<"\n";
+    std::cout << "Rectangle getS(S): " << obj1.getS() << "\n";
+    std::cout << "Rectangle getP(P): " << obj1.getP() <<"\n";
     obj1.print();
     
     std::cout << "\n";
     
     Triangle obj3(p1, p2, p3);
-    std::cout << "Triangle Area(S): " << obj3.Area() << "\n";
-    std::cout << "Triangle Perimeter(P): " << obj3.Perimeter() << "\n";
+    std::cout << "Triangle getS(S): " << obj3.getS() << "\n";
+    std::cout << "Triangle getP(P): " << obj3.getP() << "\n";
 
     std::cout << "\n^^^^^*****VIRTUAL SHAPE PRINT*****^^^^^\n\n";
 
     Point* shp1 = &p1;
     shp1->foo();
     shp1->boo();
-    std::cout << "\n"; 
     printL(&p1);
     std::cout << "\n"; 
-    printArea(&p1);
+    printgetS(&p1);
     std::cout << "\n"; 
-    printPerimeter(&p1);
+    printgetP(&p1);
     
     std::cout << "\n\n";
     
@@ -350,20 +349,20 @@ int main() {
     Rectangle* shp3 = &obj1;
     shp3->foo();
     shp3->boo();
-    std::cout << "Rectangle Area(S): ";
-    printArea(&obj1);
-    std::cout << "\nRectangle Perimeter(P): ";
-    printPerimeter(&obj1);
+    std::cout << "Rectangle getS(S): ";
+    printgetS(&obj1);
+    std::cout << "\nRectangle getP(P): ";
+    printgetP(&obj1);
     
     std::cout << "\n\n";
     
     Triangle* shp4 = &obj3;
     shp4->foo();
     shp4->boo();
-    std::cout << "Triangle Area(S): ";
-    printArea(&obj3);
-    std::cout << "\nTriangle Perimeter(P): ";
-    printPerimeter(&obj3);
+    std::cout << "Triangle getS(S): ";
+    printgetS(&obj3);
+    std::cout << "\nTriangle getP(P): ";
+    printgetP(&obj3);
     
     std::cout << "\n\n";
     
@@ -373,7 +372,7 @@ int main() {
     std::cout << "L = ";
     printL(&obj2);
     std::cout << "\nS = ";
-    printArea(&obj2);
+    printgetS(&obj2);
     std::cout << "\n"; 
     
     return 0;   
