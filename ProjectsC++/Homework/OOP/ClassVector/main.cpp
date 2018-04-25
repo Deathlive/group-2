@@ -2,7 +2,7 @@
 #include "vector.h"
 
 int main() {
-    vector vec;
+    Vector vec;
     int element = 0, position = 0, ch = 1;
     
     std::cout <<"\n-----Main Menu-----\n";
@@ -20,6 +20,7 @@ int main() {
     std::cout << "10.isEmpty\n";
     std::cout << "11.Reverse\n";
     std::cout << "12.Quick Sort\n";
+    std::cout << "13.Binary Search\n";
     std::cout <<"-------------------\n";
     std::cout << "0.Exit";
     std::cout <<"\n-------------------\n";
@@ -33,15 +34,15 @@ int main() {
         switch(ch)
         {
             case 0:
-                exit(1);
+                std::exit(1);
             case 1:
                 std::cout<<"-->Enter -1 to EXIT<--\n";
                 std::cout << "Enter number";
-                std::cout << "\n[" << 1 << "]" << ": ";
+                std::cout << "\n[" << 0 << "]" << ": ";
                 std::cin >> element;
                 while (element != -1) {
                     vec.push_back(element);
-                    std::cout << "[" << ch + 1 << "]" << ": ";
+                    std::cout << "[" << ch << "]" << ": ";
                     std::cin >> element;
                     while (std::cin.fail()) {
                         std::cout << "*Error!! Enter Number: \n";
@@ -103,6 +104,11 @@ int main() {
             case 12:
                 vec.sortAsc();
                 vec.printVector();
+                break;
+            case 13:
+                std::cout << "\nEnter the element to be searched: ";
+                std::cin >> element;
+                vec.linearSearch(element);
                 break;
             default:
                 std::cout << "\n--> Illegal Option.Please try again\n";

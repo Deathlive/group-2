@@ -1,114 +1,201 @@
 #include <iostream>
 #include "list.h"
 
-list::list() {
-    head = NULL;
-    tail = NULL;
-}
+List::List(): head(nullptr), tail(nullptr), count(0) { }
 
-list::~list() {
-    delete []head;
-    delete []tail;
-}
-void list::createnode(int value) {
-    node *temp = new node;
-    temp->data = value;
-    temp->next = NULL;
-    if (head == NULL)
-    {
-        head = temp;
-        tail = temp;
-        temp = NULL;
-    } else {	
-        tail->next = temp;
-        tail = temp;
-    }
-}
-
-void list::display() {
-    node *temp = new node;
-    temp = head;
-    std::cout << "Display: ";
-    while (temp != NULL) {
-        std::cout << temp->data << " <-> ";
-        temp = temp->next;
-    }
-    std::cout << "NULL\n";
-}
-
-void list::insert_start(int value) {
-    node *temp = new node;
-    temp->data = value;
-    temp->next = head;
-    head = temp;
-}
-
-void list::insert_position(int pos, int value) {
-    node *q = head;
-    int cnt = 0;
-    while (q != NULL) {
-        q = q->next;
-        cnt++;
-    }
-    if (0 < cnt && pos <= cnt ) {
-        node *pre = new node;
-        node *cur = new node;
-        node *temp = new node;
-        cur = head;
-        for (int i = 1; i < pos; ++i) {
-            pre = cur;
-            cur = cur->next;
+List::List(const List& list): head(nullptr), tail(nullptr), count(0) {
+    for(int i = 0; i < list.getCount(); ++i) {
+        Node* temp = new Node();
+        temp->data = list[i];
+        if(tail == nullptr) {
+            head = temp;
+        } else {
+            tail->next = temp;
         }
-        temp->data = value;
-        pre->next = temp;	
-        temp->next = cur;
-    } else {
-        std::cout << "Error! Write correct position\n";
+        tail = temp;
+        count++;
     }
 }
 
-void list::delete_first() {
-    node *temp = new node;
-    temp = head;
+List::~List() {
+    Node* elem = head;
+    for(int i = 0; i < count; ++i) {
+        Node* elemNext = elem->next;
+        delete[] elem;
+        elem = elemNext;
+    }
+}
+
+const int& List::operator [](int index) const {
+    Node* temp = head;
+    int i = 0;
+    while(i < count) {
+        if(i == index) {
+            return temp->data;
+        }
+        temp = temp->next;
+        i++;
+    }
+}
+
+void List::addHead(int data) {
+    Node* temp = new Node();
+    temp->data = data;
+    temp->next = head;
+    if(head == nullptr) {
+        tail = temp;
+    }
+    head = temp;
+    count++;
+}
+
+void List::addTail(int data) {
+    Node* temp = new Node();
+    temp->data = data;
+    if(tail == nullptr) {
+        head = temp;
+    } else {
+        tail->next = temp;
+    }
+    tail = temp;
+    count++;
+}
+
+void List::insert(int data, int position) {
+    if(position >= count) {
+        addTail(data);
+        return;
+    }
+    else if(position <= 0) {
+        addHead(data);
+        return;
+    }
+
+    Node* temp = new Node();
+    temp->data = data;
+    int i = 1;
+    Node* beforeNew = head;
+    while(i++ != position) {
+        beforeNew = beforeNew->next;
+    }
+    temp->next = beforeNew->next;
+    beforeNew->next = temp;
+
+    count++;
+}
+
+void List::delHead() {
+    if(count == 0) {
+        std::cout << "Empty list!\n";
+        return;
+    }
+    Node* temp = head;
     head = head->next;
     delete temp;
+    count--;
+    if(head == nullptr) {
+        tail = nullptr;
+    }
 }
 
-void list::delete_last() {
-    node *current = new node;
-    node *previous = new node;
-    current = head;
-    while (current->next != NULL) {
-        previous = current;
-        current = current->next;	
+void List::delTail() {
+    if(count == 0) {
+        std::cout << "Empty list!\n";
+        return;
     }
-    tail = previous;
-    previous->next = NULL;
-    delete current;
+    del(count - 1);
 }
 
-void list::delete_position(int pos) {
-    node *q = head;
-    int cnt = 0;
-    while (q != NULL) {
-        q = q->next;
-        cnt++;
+void List::del(int position) {
+    if(position <= 0) {
+        delHead();
+        return;
     }
-    if (0 < cnt && pos <= cnt ) {
-        node *current = new node;
-        node *previous = new node;
-        current = head;
-        for (int i = 1; i < pos; ++i) {
-            previous = current;
-            current = current->next;
+
+    if(position >= count) {
+        position = count - 1;
+    }
+
+    int i = 1;
+    Node* beforeDel = head;
+    while(i++ != position) {
+        beforeDel = beforeDel->next;
+    }
+    Node* sacrifice = beforeDel->next;
+    beforeDel->next = sacrifice->next;
+    delete sacrifice;
+    count--;
+    if(beforeDel->next == nullptr) {
+        tail = beforeDel;
+    }
+}
+
+void List::clear() {
+    while(head != nullptr) {
+        delHead();
+    }
+}
+
+void List::print() const {
+    if(count == 0) {
+        std::cout << "Empty list!\n";
+        return;
+    }
+    Node* current = head;
+    std::cout << "\nList: ";
+    while(current != nullptr) {
+        std::cout << current->data << "  ";
+        current = current->next;
+    }
+    std::cout << "\n";
+}
+
+int List::getCount() const {
+    return count;
+}
+
+int List::search(int data) const {
+    bool founded = false;
+    if(count == 0) {
+        
+    }
+    Node* temp = head;
+    int i = 0;
+    while(i < count) {
+        if(data == temp->data) {
+            std::cout << "\nThe Number Found: " << data << " - Index[" << i << "]\n";
+            founded = true;
         }
-        previous->next = current->next;
-    } else {
-        std::cout << "Error! Write correct position\n";
+        i++;
+        temp = temp->next;
+    }
+    
+    if(!founded){
+        std::cout<<"\nThe " << data << " Not found: \n";
     }
 }
 
-void list::delete_all() {
-    head = NULL;
-    tail = NULL;
+bool List::isEmpty() const {
+    bool result = false;
+
+    if(count == 0) {
+        result = true;
+    }
+
+    return result;
+}
+
+void List::reverse() {
+    Node* currNode = head;
+    Node* prevNode = nullptr;
+    Node* nextNode = nullptr;
+    
+    while(currNode != nullptr) {
+      nextNode = currNode->next;
+      currNode->next = prevNode;
+      prevNode = currNode;
+      currNode = nextNode;
+    }
+    
+    head = prevNode;
 }

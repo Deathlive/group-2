@@ -1,20 +1,23 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-class queue
-{
+class Queue {
     private:
-        int *elem;
-        int qend, qbeg;
-        unsigned int size;
+        int* arr;
+        int maxCount;
+        int count;
+        
+        void shift(int index);
     public:
-        queue(unsigned int size);
-        ~queue();
-        void push(int x);
-        void pop(int& y);
-        int  top();
+        Queue(unsigned int size);
+        Queue(const Queue& obj);
+        ~Queue();
+        void enqueue(int number);
+        int dequeue();
+        void show();
         void clear();
-        bool empty();
+        bool isEmpty();
+        bool isFull();
 };
 
 #endif // QUEUE_H

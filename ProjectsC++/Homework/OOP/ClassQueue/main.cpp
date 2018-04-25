@@ -3,14 +3,14 @@
 
 int main()
 {
-    queue q(5);
-    int x = 0, y = 0, ch = 1;
+    Queue q(5);
+    int element = 0, ch = 1;
     
     std::cout <<"\n-----Main Menu-----\n";
-    std::cout << "1.Push\n";
-    std::cout << "2.Pop\n";
+    std::cout << "1.Enqueue\n";
+    std::cout << "2.Dequeue\n";
     std::cout << "3.Full or Empty\n";
-    std::cout << "4.Print Top\n";
+    std::cout << "4.Print Queue\n";
     std::cout << "5.Clear Queue\n";
     std::cout << "0.Exit";
     std::cout <<"\n--------------------\n";
@@ -27,37 +27,39 @@ int main()
                 exit(1);
             case 1:
                 std::cout<<"Enter -1 to exit\n";
-                std::cout << "Enter ONLY number to push: ";
-                std::cin >> x;
-                while(x != -1) {
-                    std::cout << "Enter the number to push: ";
-                    q.push(x);
-                    std::cin >> x;
+                std::cout << "Enter number: ";
+                std::cin >> element;
+                while(element != -1) {
+                    std::cout << "Enter number: ";
+                    q.enqueue(element);
+                    std::cin >> element;
+                    if( q.isFull() ) {
+                        std::cout<<"--> Queue is full, Please enter -1 to exit\n";
+                    } 
                     while(std::cin.fail()) {
                         std::cout << "Error!! Enter Number: \n";
                         std::cin.clear();
                         std::cin.ignore(256,'\n');
-                        std::cin >> x;
+                        std::cin >> element;
                     }
                 }
                 break;
             case 2:
-                if(!q.empty()) {
-                    std::cout<<"--> POP! -> " << q.top() << "\n";
-                    q.pop(y);
-                } else {
-                    std::cout<<"--> Queue is empty! What to pop...!\n";
-                }
+                q.dequeue();
+                q.show();
                 break;
             case 3:
-                if(q.empty()) {
+                if( q.isEmpty() ) {
                     std::cout<<"--> Queue is empty.\n";
+                } 
+                else if( q.isFull() )  {
+                    std::cout<<"--> Queue is full.\n";
                 } else {
                     std::cout<<"--> Queue is not empty.\n";
                 }
                 break;
             case 4:
-                std::cout << "--> TOP! -> " << q.top() << "\n";
+                q.show();
                 break;
             case 5:
                 q.clear();

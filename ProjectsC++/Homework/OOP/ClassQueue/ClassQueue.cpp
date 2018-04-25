@@ -1,48 +1,85 @@
 #include <iostream>
 #include "queue.h"
 
-queue::queue(unsigned int size) {
-    if(size > 0) {
-        this->size = size;
-        elem = new int[size];
-    } else {
-        std::cout << "Write Correct Size!\n";
-    }
-    qend = 0;
-    qbeg = 0;
-    for (int i = 0; i < size; i++)
-        elem[i] = 0;
+Queue::Queue(unsigned int size) {
+    maxCount = size;
+    count = 0;
+    arr = new int[maxCount];
 }
 
-queue::~queue() {
-    delete[] elem;
-}
-
-void queue::push(int x) {
-    if(!(qend == size)) {
-        elem[qend++] = x;
-        if (qend == size + 1)
-            qend = 1;           
-    } else {
-        std::cout<<"--> Error! What to Push...!\n";
+Queue::Queue(const Queue& obj) {
+    arr = obj.arr;
+    maxCount = obj.maxCount;
+    count = obj.count;
+    arr = new int[maxCount];
+    for(int i = 0; i < obj.count; ++i) {
+        arr[i] = obj.arr[i];
     }
 }
 
-void queue::pop(int& y) {
-    y = elem[qbeg++];
-    if (qbeg == size + 1)
-        qbeg = 1;
+Queue::~Queue() {
+    delete[] arr;
 }
 
-bool queue::empty() {
-    return (qbeg == qend);
+void Queue::enqueue(int number) {
+    if( isEmpty() ) {
+        arr[0] = number;
+        count++;
+    } else if( !isFull() ) {
+        for(int i = 0; i < count; ++i) {
+            if(number >= arr[i]) {
+                shift(i);
+                arr[i] = number;
+                count++;
+                break;
+            }
+        }
+    }
 }
 
-void queue::clear() {
-    qend = 0;
-    qbeg = 0;
+int Queue::dequeue() {
+    int result = -1;
+
+    if( !isEmpty() ) {
+        int first = arr[0];
+        for(int i = 1; i < count; ++i) {
+            arr[i - 1] = arr[i];
+        }
+        count--;
+        result = first;
+    }
+
+    return result;
 }
 
-int queue::top() {
-    return ( elem[qbeg]);
+bool Queue::isEmpty() {
+    return count == 0;
+}
+
+bool Queue::isFull() {
+    return count == maxCount;
+}
+
+void Queue::clear() {
+    for(int i = 0; i < maxCount; ++i) {
+        arr[i] = 0;
+    }
+    count = 0;
+}
+
+void Queue::show() {
+    std::cout << "------------------------------\n";
+    for (int i = 0; i < count; ++i) {
+        std::cout << arr[i] << "  ";
+    }
+    std::cout << "\n";
+    std::cout << "------------------------------\n";
+}
+
+void Queue::shift(int index) {
+    if ( !isEmpty() ) {
+        for(int i = count; i > index; --i) {
+            arr[i] = arr[i - 1];
+        }
+    }
 }

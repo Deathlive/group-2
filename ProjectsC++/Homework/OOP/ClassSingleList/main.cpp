@@ -3,21 +3,25 @@
 
 int main()
 {
-	list obj;
-	int element = 0, position = 0, ch = 1;
+	List obj;
+	int element = 0, position = 0, ch = 1, select = 1;
     
     std::cout <<"\n-----Main Menu-----\n";
-    std::cout << "1.Create Node\n";
-    std::cout << "2.Display Node\n";
-    std::cout << "3.Delete All\n";
+    std::cout << "1.Add Head\n";
+    std::cout << "2.Add Tail\n";
+    std::cout << "3.Insert\n";
     std::cout <<"-------------------\n";
-    std::cout << "4.Insert at End\n";
-    std::cout << "5.Insert at Start\n";
-    std::cout << "6.Inserting after position\n";
+    std::cout << "4.Delete Head\n";
+    std::cout << "5.Delete Tail\n";
+    std::cout << "6.Delete At Index\n";
+    std::cout << "7.Clear\n";
     std::cout <<"-------------------\n";
-    std::cout << "7.Delete at End\n";
-    std::cout << "8.Delete at Start\n";
-    std::cout << "9.Delete At Position\n";
+    std::cout << "8.Print List\n";
+    std::cout << "9.Print List Size\n";
+    std::cout <<"-------------------\n";
+    std::cout << "10.Search\n";
+    std::cout << "11.IsEmpty\n";
+    std::cout << "12.Reverse\n";
     std::cout <<"-------------------\n";
     std::cout << "0.Exit";
     std::cout <<"\n-------------------\n";
@@ -33,13 +37,14 @@ int main()
             case 0:
                 exit(1);
             case 1:
-                std::cout<<"-->Enter -1 to EXIT<--\n";
+                select = 1;
+                std::cout << "-->Enter -1 to EXIT<--\n";
                 std::cout << "Enter number";
-                std::cout << "\n[" << 1 << "]" << ": ";
+                std::cout << "\n[" << 0 << "]" << ": ";
                 std::cin >> element;
                 while (element != -1) {
-                    obj.createnode(element);
-                    std::cout << "[" << ch + 1 << "]" << ": ";
+                    obj.addHead(element);
+                    std::cout << "[" << select << "]" << ": ";
                     std::cin >> element;
                     while (std::cin.fail()) {
                         std::cout << "*Error!! Enter Number: \n";
@@ -47,70 +52,79 @@ int main()
                         std::cin.ignore(256,'\n');
                         std::cin >> element;
                     }
-                    ++ch;
+                    ++select;
                 }
+                obj.print();
                 break;
             case 2:
-                obj.display();
+                select = 1;
+                std::cout << "-->Enter -1 to EXIT<--\n";
+                std::cout << "Enter number";
+                std::cout << "\n[" << 0 << "]" << ": ";
+                std::cin >> element;
+                while (element != -1) {
+                    obj.addTail(element);
+                    std::cout << "[" << select << "]" << ": ";
+                    std::cin >> element;
+                    while (std::cin.fail()) {
+                        std::cout << "*Error!! Enter Number: \n";
+                        std::cin.clear();
+                        std::cin.ignore(256,'\n');
+                        std::cin >> element;
+                    }
+                    ++select;
+                }
+                obj.print();
                 break;
             case 3:
-                std::cout << "Delete All\n";
-            	obj.delete_all();
+                std::cout << "Enter Position: ";
+                std::cin >> position;
+                std::cout << "Enter Number: ";
+                std::cin >> element;
+                obj.insert(element, position);
+                obj.print();
                 break;
             case 4:
-                std::cout << "Enter Number: ";
-                std::cin >> element;
-            	obj.createnode(element);
-            	obj.display();
+                std::cout << "Head Deleted..";
+                obj.delHead();
+                obj.print();
                 break;
             case 5:
-                if (obj.head == NULL) {
-                    std::cout << "List empty..\n";
-                    break;
-                }
-                std::cout << "Enter Number: ";
-                std::cin >> element;
-            	obj.insert_start(element);
-            	obj.display();
+                std::cout << "Tail Deleted..";
+                obj.delTail();
+                obj.print();
                 break;
             case 6:
-                if (obj.head == NULL) {
-                    std::cout << "List empty..\n";
-                    break;
-                }
-                std::cout << "Enter Position: ";
+                std::cout << "Enter Index: ";
                 std::cin >> position;
-                std::cout << "Enter Number: ";
-                std::cin >> element;
-            	obj.insert_position(position, element);
-            	obj.display();
+                obj.del(position);
+                obj.print();
                 break;
             case 7:
-                if (obj.head == NULL) {
-                    std::cout << "List empty..\n";
-                    break;
-                }
-                obj.delete_first();
-            	obj.display();
+                std::cout << "List Cleared!\n";
+                obj.clear();
                 break;
             case 8:
-                if (obj.head == NULL) {
-                    std::cout << "List empty..\n";
-                    break;
-                }
-                obj.delete_last();
-            	obj.display();
+                obj.print();
                 break;
             case 9:
-                if (obj.head == NULL) {
+                std::cout << "List Size: " << obj.getCount() << "\n";
+                break;
+            case 10:
+                std::cout << "Enter Number: ";
+                std::cin >> element;
+                obj.search(element);
+                break;
+            case 11:
+                if ( obj.isEmpty() ) {
                     std::cout << "List empty..\n";
-                    break;
+                } else {
+                    std::cout << "List not empty..\n";
                 }
-                std::cout << "Enter Position: ";
-                std::cin >> position;
-                obj.delete_position(position);
-                std::cout << "Display: ";
-            	obj.display();
+                break;
+            case 12:
+                obj.reverse();
+                obj.print();
                 break;
             default:
                 std::cout << "\n--> Illegal Option.Please try again\n";

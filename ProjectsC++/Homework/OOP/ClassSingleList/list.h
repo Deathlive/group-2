@@ -1,24 +1,32 @@
 #ifndef LIST_H
 #define LIST_H
 
-struct node {
-    int data;
-    node *next;	
-};
-
-class list {
+class List {
+    private:
+        struct Node {
+            int data = 0;
+            Node* next = nullptr;
+        };
+        Node* head;
+        Node* tail;
+        int count;
     public:
-        node *head, *tail;
-        list();
-        ~list();
-        void createnode(int value);
-        void display();
-        void insert_start(int value);
-        void insert_position(int pos, int value);
-        void delete_first();
-        void delete_last();
-        void delete_position(int pos);
-        void delete_all();
+        List();
+        List(const List& obj);
+        ~List();
+        const int& operator [](int index) const;
+        void addHead(int data);
+        void addTail(int data);
+        void insert(int data, int position);
+        void delHead();
+        void delTail();
+        void del(int position);
+        void clear();
+        void print() const;
+        int getCount() const;
+        int search(int data) const;
+        bool isEmpty() const;
+        void reverse();
 };
 
 #endif // LIST_H

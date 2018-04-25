@@ -1,42 +1,43 @@
 #include <iostream>
 #include "vector.h"
 
-vector::vector() {
+Vector::Vector() {
     maxsize = 20;
     array = new int [maxsize];
     vsize = 0;
 }
 
-vector::vector(int i) {
+Vector::Vector(unsigned int i) {
     maxsize = i;
     array = new int [maxsize];
     vsize = 0;
 }
 
-vector::vector(const vector& v) {
+Vector::Vector(const Vector& v) {
     maxsize = v.maxsize;
     vsize = v.vsize;
     array = new int[maxsize];
     for(int i = 0; i < v.vsize; ++i) {
         array[i] = v.array[i];
     }
-    
 }
 
-vector::~vector() {
+Vector::~Vector() {
     delete[] array;
 }
 
-void vector::push_back(int i) {
+void Vector::push_back(unsigned int i) {
     if(vsize + 1 > maxsize) {
         alloc_new();
     }
     array[vsize] = i;
     vsize++;
 }
-void vector::push_front(int i) {
-    alloc_new();
-    for (int i = vsize; i > 0; i--)
+void Vector::push_front(unsigned int i) {
+    if(vsize + 1 > maxsize) {
+        alloc_new();
+    }
+    for (int i = vsize; i > 0; --i)
     {
         array[i] = array[i - 1];
     }
@@ -44,17 +45,11 @@ void vector::push_front(int i) {
     vsize++;
 }
 
-int vector::operator[](int i) {
+const int& Vector::operator[](int i) {
     return array[i];
 }
 
-int vector::at(int i) {
-    if(i < vsize) {
-        return array[i];
-    }
-}
-
-void vector::alloc_new() {
+void Vector::alloc_new() {
     maxsize = vsize * 2;
     int* tmp = new int[maxsize];
     for(int i = 0; i < vsize; ++i) {
@@ -64,16 +59,16 @@ void vector::alloc_new() {
     array = tmp;
 }
 
-int vector::size() {
+int Vector::size() {
     return vsize;
 }
 
-vector& vector::operator+=(int i) {
+Vector& Vector::operator+=(int i) {
     this->push_back(i);
     return *this;
 }
 
-vector& vector::operator=(const vector& v) {
+Vector& Vector::operator=(const Vector& v) {
     if(this != &v) {
         maxsize = v.maxsize;
         vsize = v.vsize;
@@ -86,41 +81,41 @@ vector& vector::operator=(const vector& v) {
     return *this;
 }
 
-void vector::clear() {
-    for(int i = 0; i < vsize; i++) {
+void Vector::clear() {
+    for(int i = 0; i < vsize; ++i) {
         array[i] = 0;
     }
     vsize = 0;
 }
 
-void vector::printVector() {
+void Vector::printVector() {
     if ( isEmpty() ) {
-        std::cout << "Collection Is Empty\n";
+        std::cout << "Vector Is Empty\n";
     } else {
         std::cout << "Vector: ";
         for(int i = 0; i < size(); ++i) {
-            std::cout << array[i] << " ";
+            std::cout << array[i] << "  ";
         }
     }
 }
 
-void vector::popFront() {
+void Vector::popFront() {
     for(int i = 0; i < vsize; ++i) {
         array[i] = array[i + 1];
     }
     vsize--;
 }
 
-void vector::popBack()
+void Vector::popBack()
 {
     vsize--;
 }
 
-bool vector::isEmpty() {
+bool Vector::isEmpty() {
     return vsize == 0;
 }
 
-void vector::reverse() {
+void Vector::reverse() {
     int* tempData = new int[maxsize];
     for(int i = 0; i < vsize ; ++i) {
         tempData[i] = array[vsize - i - 1];
@@ -129,9 +124,9 @@ void vector::reverse() {
     array = tempData;
 }
 
-void vector::removeAt(int index) {
+void Vector::removeAt(int index) {
     if(index < vsize && index > -1) {
-        for(int i = index; i < vsize; i++) {
+        for(int i = index; i < vsize; ++i) {
             array[i] = array[i + 1];
         }
         vsize--;
@@ -140,13 +135,13 @@ void vector::removeAt(int index) {
     }
 }
 
-void vector::insert(int value, int index) {
+void Vector::insert(unsigned int value, int index) {
     if(index < vsize && index > -1) {
         array[index] = value;
     }
 }
 
-void vector::quickSortAsc(int arr[], int left, int right) {
+void Vector::quickSortAsc(int arr[], int left, int right) {
     int i = left, j = right;
     int tmp;
     int pivot = arr[(left + right) / 2];
@@ -171,6 +166,21 @@ void vector::quickSortAsc(int arr[], int left, int right) {
         quickSortAsc(arr, i, right);
 }
 
-void vector::sortAsc() {
+void Vector::sortAsc() {
     quickSortAsc(array, 0, vsize - 1);
+}
+
+int Vector::linearSearch(int element) {
+    bool founded = false;
+    for(int i = 0; i < maxsize; ++i) {
+        if(array[i] == element) {
+            std::cout << "\nThe Number Found: " << array[i] << " - Index[" << i << "]\n";
+            founded = true;
+            break;
+        }
+    }
+    
+    if(!founded){
+        std::cout<<"\nThe " << element << " Not found: \n";
+    }
 }
