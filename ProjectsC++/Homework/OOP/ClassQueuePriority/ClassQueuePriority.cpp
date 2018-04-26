@@ -8,7 +8,6 @@ Queue::Queue(unsigned int size) {
 }
 
 Queue::Queue(const Queue& obj) {
-    arr = obj.arr;
     maxCount = obj.maxCount;
     count = obj.count;
     arr = new int[maxCount];

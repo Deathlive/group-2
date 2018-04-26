@@ -27,14 +27,20 @@ List::~List() {
 }
 
 const int& List::operator [](int index) const {
-    Node* temp = head;
-    int i = 0;
-    while(i < count) {
-        if(i == index) {
-            return temp->data;
+    static int tmp = -1;
+    if (count == 0 || index < count) {
+        Node* temp = head;
+        int i = 0;
+        while(i < count) {
+            if(i == index) {
+                return temp->data;
+            }
+            temp = temp->next;
+            i++;
         }
-        temp = temp->next;
-        i++;
+    } else {
+        std::cout << "Error: Write correct index.. ";
+        return tmp;
     }
 }
 

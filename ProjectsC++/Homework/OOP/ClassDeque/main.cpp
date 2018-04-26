@@ -3,7 +3,6 @@
 
 int main() {
     Deque obj;
-    
     int element = 0, position = 0, ch = 1;
     
     std::cout <<"\n-----Main Menu-----\n";

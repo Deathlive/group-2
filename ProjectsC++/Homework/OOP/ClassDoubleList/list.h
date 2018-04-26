@@ -1,26 +1,33 @@
 #ifndef DOUBLE_LIST_H
 #define DOUBLE_LIST_H
 
-
-struct node {
-    int data;
-    node *next;
-    node *prev;
-};
-
-class double_list {
+class Double_List {
+    private:
+        struct Node {
+            int data;
+            Node *next;
+            Node *prev;
+        };
+        Node* first;
+        Node* current;
+        Node* last;
+        int count;
     public:
-        node *start;
-        double_list();
-        ~double_list();
-        void create_list(int value);
-        void display();
-        void insert_start(int value);
-        void add_after(int value, int position);
-        void delete_element(int value);
-        void count();
+        Double_List();
+        Double_List(const Double_List& obj);
+        ~Double_List();
+        const int& operator [](int index);
+        bool isEmpty() const;
+        void addHead(int value);
+        void addLast(int value);
+        int getCount() const;
+        void print();
+        void delHead();
+        void delLast();
+        void del(int);
+        void clear();
         void reverse();
-        void delete_all();
+        int search(int value);
 };
 
 #endif // DOUBLE_LIST_H

@@ -13,6 +13,7 @@ class Deque {
         int count;
     public:
         Deque();
+        Deque(const Deque&);
         ~Deque();
         void insertFront(int element);
         int removeFront();

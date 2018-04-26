@@ -1,153 +1,194 @@
 #include <iostream>
 #include "list.h"
 
-double_list::double_list() {
-    start = NULL;
-}
+Double_List::Double_List(): first(nullptr), current(nullptr), last(nullptr), count(0) { }
 
-double_list::~double_list(){ }
-
-void double_list::create_list(int value)
-{
-    node *s, *temp;
-    temp = new(node); 
-    temp->data = value;
-    temp->next = NULL;
-    if (start == NULL) {
-        temp->prev = NULL;
-        start = temp;
-    } else {
-        s = start;
-        while (s->next != NULL) {
-            s = s->next;
-        }
-        s->next = temp;
-        temp->prev = s;
+Double_List::Double_List(const Double_List& obj): first(nullptr), current(nullptr), last(nullptr), count(obj.count) {
+    Node* tmp = obj.first;
+    Node* next = NULL;
+    while(tmp) {
+        first = new Node();
+        first->data = tmp->data;
+        first->next = tmp->next;
+        next ? next->prev = first: last = first;
+        next = first;
+        tmp = tmp->prev;
     }
 }
 
-void double_list::display()
-{
-    node *q;
-    if (start == NULL) {
+Double_List::~Double_List(){ 
+    Node* elem = first;
+    for(int i = 0; i < count; ++i) {
+        Node* elemNext = elem->next;
+        delete[] elem;
+        elem = elemNext;
+    }
+}
+
+const int& Double_List::operator [](int index){
+    static int tmp = -1;
+    if (count == 0 || index < count) {
+        current = first;
+        int i = 0;
+        while(i < count) {
+            if(i == index) {
+                return current->data;
+            }
+            current = current->next;
+            i++;
+        }
+    } else {
+        std::cout << "Error: Write correct index.. ";
+        return tmp;
+    }
+}
+
+bool Double_List::isEmpty() const {
+    return count == 0;
+}
+
+void Double_List::addHead(int value) {
+    current = new Node();
+    current->data = value;
+    if(first) {
+        first->prev = current;
+        current->next = first;
+    }
+    if(NULL == last) {
+        last = current;
+    }
+    first = current;
+    count++;
+}
+
+void Double_List::addLast(int value) {
+    current = new Node();
+    current->data = value;
+    if (last) {
+        last->next = current;
+        current->prev = last;
+    }
+    if(NULL == first) {
+        first = current;
+    }
+    last = current;
+    count++;
+}
+
+int Double_List::getCount() const { 	
+    return count;
+}
+
+void Double_List::print() {
+    if(first == NULL) {
         std::cout << "List empty,nothing to display\n";
         return;
     }
-    q = start;
-    std::cout << "Display: ";
-    while (q != NULL) {
-        std::cout << q->data << " <-> ";
-        q = q->next;
+    current = first;
+    std::cout << "\nDisplay: ";
+    while(current != NULL) {
+        std::cout << current->data << " <-> ";
+        current = current->next;
     }
     std::cout << "NULL\n";
 }
 
-void double_list::insert_start(int value)
-{
-    if (start == NULL) {
-        std::cout << "First Create the list.\n";
+void Double_List::delHead() {
+    if(count == 0) {
+        std::cout << "Empty list!\n";
+        return;
     }
-    node *temp;
-    temp = new(node);
-    temp->prev = NULL;
-    temp->data = value;
-    temp->next = start;
-    start->prev = temp;
-    start = temp;
-    std::cout << "Element Inserted\n";
+    Node* temp = first;
+    first = first->next;
+    delete temp;
+    count--;
+    if(first == nullptr) {
+        last = nullptr;
+    }
 }
 
-void double_list::add_after(int value, int pos)
-{
-    if (start == NULL) {
-        std::cout << "First Create the list.\n";
+void Double_List::delLast() {
+    
+    Node* temp = new Node();
+    temp = last;
+    if (last->prev != NULL) {
+        last->prev->next = NULL;
     }
-    node *tmp, *q;
-    int i;
-    q = start;
-    for (i = 0; i < pos - 1; i++) {
-        q = q->next;
-        if (q == NULL) {
-            std::cout << "There are less than ";
-            std::cout << pos << " elements.\n";
-        }
-    }
-    tmp = new(node);
-    tmp->data = value;
-    if (q->next == NULL) {
-        q->next = tmp;
-        tmp->next = NULL;
-        tmp->prev = q;      
-    } else {
-        tmp->next = q->next;
-        tmp->next->prev = tmp;
-        q->next = tmp;
-        tmp->prev = q;
-    }
-    std::cout << "Element Inserted\n";
+    last = last->prev;
+    count--;
 }
 
-void double_list::delete_element(int value)
-{
-    node *tmp, *q;
-    if (start->data == value) {
-        tmp = start;
-        start = start->next;  
-        start->prev = NULL;
-        std::cout << "Element Deleted\n";
-        free(tmp);
+void Double_List::del(int value) {
+    if (first->data == value) {
+        current = first;
+        first = first->next;  
+        first->prev = NULL;
+        std::cout<<"Element Deleted\n";
+        free(current);
+        return;
     }
-    q = start;
-    while (q->next->next != NULL) {
-        if (q->next->data == value) {
-            tmp = q->next;
-            q->next = tmp->next;
-            tmp->next->prev = q;
-            std::cout << "Element Deleted\n";
-            free(tmp);
+    last = first;
+    while (last->next->next != NULL) {
+        if (last->next->data == value) {
+            current = last->next;
+            last->next = current->next;
+            current->next->prev = last;
+            std::cout<<"Element Deleted\n";
+            free(current);
             return;
         }
-        q = q->next;
+        last = last->next;
     }
-    if (q->next->data == value) { 	
-        tmp = q->next;
-        free(tmp);
-        q->next = NULL;
-        std::cout << "Element Deleted\n";
+    
+    if (last->next->data == value) { 	
+        current = last->next;
+        free(current);
+        last->next = NULL;
+        std::cout<<"Element Deleted\n";
         return;
     }
     std::cout << "Element " << value << " not found\n";
 }
 
-void double_list::count()
-{ 	
-    node *q = start;
-    int cnt = 0;
-    while (q != NULL) {
-        q = q->next;
-        cnt++;
+void Double_List::clear() {
+    while(first != nullptr) {
+        delHead();
     }
-    std::cout << "Number of elements are: " << cnt << "\n";
 }
 
-void double_list::reverse()
-{
-    node *p1, *p2;
-    p1 = start;
+void Double_List::reverse() {
+    Node *p1, *p2;
+    p1 = first;
     p2 = p1->next;
     p1->next = NULL;
     p1->prev = p2;
-    while (p2 != NULL)
-    {
+    while(p2 != NULL) {
         p2->prev = p2->next;
         p2->next = p1;
         p1 = p2;
         p2 = p2->prev; 
     }
-    start = p1;
+    first = p1;
     std::cout << "List Reversed\n";
 }
 
-void double_list::delete_all() {
-    start = NULL;
+int Double_List::search(int value) {
+    bool founded = false;
+    if(count == 0) {
+        
+    }
+    current = first;
+    int i = 0;
+    while(i < count) {
+        if(value == current->data) {
+            std::cout << "\nThe Number Found: " << value << " - Index[" << i << "]\n";
+            founded = true;
+        }
+        i++;
+        current = current->next;
+    }
+    
+    if(!founded){
+        std::cout<<"\nThe " << value << " Not found: \n";
+    }
 }

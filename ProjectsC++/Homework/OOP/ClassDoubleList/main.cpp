@@ -3,20 +3,25 @@
 
 int main()
 {
-    int ch = 1, element = 0, position = 0;
-    double_list obj;
-    
-    std::cout <<"\n-----Main Menu-----\n";        
-    std::cout << "1.Create Node\n";
-    std::cout << "2.Display Node\n";
-    std::cout << "3.Delete All\n";
+    Double_List obj;
+    int element = 0, position = 0, ch = 1, select = 1;
+
+    std::cout <<"\n-----Main Menu-----\n";
+    std::cout << "1.Add Head\n";
+    std::cout << "2.Add Last\n";
     std::cout <<"-------------------\n";
-    std::cout << "4.Insert at Start\n";
-    std::cout << "5.Inserting after position\n";
-    std::cout << "6.Delete after position\n";
+    std::cout << "3.Delete Head\n";
+    std::cout << "4.Delete Last\n";
+    std::cout << "5.Delete At Value\n";
+    std::cout << "6.Clear\n";
     std::cout <<"-------------------\n";
-    std::cout << "7.Count\n";
-    std::cout << "8.Reverse\n";
+    std::cout << "7.Print List\n";
+    std::cout << "8.Print List Size\n";
+    std::cout <<"-------------------\n";
+    std::cout << "9.Search\n";
+    std::cout << "10.IsEmpty\n";
+    std::cout << "11.Reverse\n";
+    std::cout <<"-------------------\n";
     std::cout << "0.Exit";
     std::cout <<"\n-------------------\n";
     
@@ -31,71 +36,91 @@ int main()
             case 0:
                 exit(1);
             case 1:
+                select = 1;
                 std::cout<<"-->Enter -1 to EXIT<--\n";
-                    std::cout << "Enter number";
-                    std::cout << "\n[" << 1 << "]" << ": ";
+                std::cout << "Enter number";
+                std::cout << "\n[" << 0 << "]" << ": ";
+                std::cin >> element;
+                while (element != -1) {
+                    obj.addHead(element);
+                    std::cout << "[" << select << "]" << ": ";
                     std::cin >> element;
-                    while (element != -1) {
-                        obj.create_list(element);
-                        std::cout << "[" << ch + 1 << "]" << ": ";
+                    while (std::cin.fail()) {
+                        std::cout << "*Error!! Enter Number: \n";
+                        std::cin.clear();
+                        std::cin.ignore(256,'\n');
                         std::cin >> element;
-                        while (std::cin.fail()) {
-                            std::cout << "*Error!! Enter Number: \n";
-                            std::cin.clear();
-                            std::cin.ignore(256,'\n');
-                            std::cin >> element;
-                        }
-                        ++ch;
                     }
+                    ++select;
+                }
+                obj.print();
                 break;
             case 2:
-                obj.display();
+                select = 1;
+                std::cout<<"-->Enter -1 to EXIT<--\n";
+                std::cout << "Enter number";
+                std::cout << "\n[" << 0 << "]" << ": ";
+                std::cin >> element;
+                while (element != -1) {
+                    obj.addLast(element);
+                    std::cout << "[" << select << "]" << ": ";
+                    std::cin >> element;
+                    while (std::cin.fail()) {
+                        std::cout << "*Error!! Enter Number: \n";
+                        std::cin.clear();
+                        std::cin.ignore(256,'\n');
+                        std::cin >> element;
+                    }
+                    ++select;
+                }
+                obj.print();
                 break;
             case 3:
-                std::cout << "Delete All\n";
-                obj.delete_all();
+                std::cout << "Head Deleted..";
+                obj.delHead();
+                obj.print();
                 break;
             case 4:
-                if (obj.start == NULL) {                      
-                    std::cout << "List empty..\n";   
-                    break;
-                }
-                std::cout << "Enter the element: ";
-                std::cin >> element;
-                obj.insert_start(element);
-                obj.display();
+                std::cout << "Last Deleted..";
+                obj.delLast();
+                obj.print();
                 break;
             case 5:
-                std::cout << "Enter the element: ";
+                std::cout << "Enter number: ";
                 std::cin >> element;
-                std::cout << "Insert Element after postion: ";
-                std::cin >> position;
-                obj.add_after(element, position);
+                obj.del(element);
+                obj.print();
                 break;
             case 6:
-                if (obj.start == NULL) {                      
-                    std::cout << "List empty..\n";   
-                    break;
-                }
-                std::cout << "Enter the element for deletion: ";
-                std::cin >> element;
-                obj.delete_element(element);
-                obj.display();
+                std::cout << "List Cleared!\n";
+                obj.clear();
                 break;
             case 7:
-                obj.count();
+                obj.print();
                 break;    
             case 8:
-                if (obj.start == NULL) {
+                std::cout << "List Size: " << obj.getCount() << "\n";
+                break;
+            case 9:
+                std::cout << "Enter Number: ";
+                std::cin >> element;
+                obj.search(element);
+                break;
+            case 10:
+                if ( obj.isEmpty() ) {
                     std::cout << "List empty..\n";
-                    break;
+                } else {
+                    std::cout << "List not empty..\n";
                 }
+                break;
+            case 11:
                 obj.reverse();
-                obj.display();
+                obj.print();
                 break;
             default:
                 std::cout << "\n--> Illegal Option.Please try again\n";
         }
     }
+    
     return 0;
 }

@@ -7,6 +7,23 @@ Deque::Deque() {
     count = 0;
 }      
 
+Deque::Deque(const Deque& deq) {
+    front = NULL;
+    last = NULL;
+    count = deq.count;
+    
+    Node* tmp = deq.last;
+    Node* next = NULL;
+    while(tmp) {
+        front = new Node();
+        front->data = tmp->data;
+        front->next = tmp->next;
+        next ? next->prev = front: last = front;
+        next = front;
+        tmp = tmp->prev;
+    }
+}
+
 Deque::~Deque() {
     Node* elem = front;
     for(int i = 0; i < count; ++i) {
@@ -142,7 +159,7 @@ void Deque::clear() {
 
 void Deque::print() {
     if ( isEmpty() ) {
-        std::cout << "deque Is Empty\n";
+        std::cout << "Deque Is Empty\n";
     } else {
         Node *temp = new Node;
         temp = front;
