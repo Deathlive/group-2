@@ -1,0 +1,78 @@
+Task 1
+
+free -h
+sudo fallocate -l 512M /media/swapfile
+sudo chmod 600 /media/swapfile.img
+sudo mkswap /media/swapfile.img
+sudo vim /etc/fstab
+Added - /media/swapfile.img swap swap sw 0 0
+sudo swapon /media/swapfile.img
+
+Task 2
+
+vim /var/tmp/script.sh
+chmod +x /var/tmp/script.sh
+sudo vim /etc/systemd/system/sample.service
+
+[Unit]
+Description=Description for sample script goes here
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/var/tmp/script.sh
+TimeoutStartSec=0
+
+[Install]
+WantedBy=default.target
+
+systemctl daemon-reload
+systemctl enable sample.service
+systemctl start sample.service
+systemctl reboot
+
+Task 3
+
+1? Check current run level: who -r
+2. Change run level: init [run level]
+3. Default run level change: vim /etc/init/rc-sysinit.conf
+
+Task 4
+
+grep  'text' -r | sort >> file.txt
+
+Task 5
+
+1. Create 3 user
+sudo useradd User1
+sudo useradd User2
+sudo useradd User3
+
+2. Create 3 group
+sudo groupadd Group1
+sudo groupadd Group2
+sudo groupadd Group3
+
+3. Users add group
+sudo usermod -a -G Group1 User1
+sudo usermod -a -G Group1 User2
+sudo usermod -a -G Group2 User2
+sudo usermod -a -G Group2 User3
+sudo usermod -a -G Group3 User1
+sudo usermod -a -G Group3 User2
+sudo usermod -a -G Group3 User3
+
+4. User1 sudo permission
+sudo visudo
+
+5. Create 2 folder
+mkdir folder1
+mkdir folder2
+
+6. Change folder1 and folder2 user:group
+sudo chown User3:Group1 folder1
+sudo chown User1:Group2 folder2
+
+7. Change folder1 and folder2 permissions
+sudo chmod 470 folder1
+sudo chmod 560 folder2
