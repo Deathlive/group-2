@@ -1,0 +1,29 @@
+1.Find .txt and .odt files
+
+find /home/ -type f -regex ".*\.\(txt\|odt\)"
+
+2.Create ext2
+
+fdisk -l
+fdisk /dev/sda
+
+3.Change ext2 to ext3
+
+df -h
+umount /dev/sda5
+tune2fs -j /dev/sda5
+
+vim /etc/fstab
+Change /dev/sda5 -> ext2 -> ext3
+
+mount /dev/sda5
+
+4.PATH
+
+echo "#!/bin/bash" >> test.sh
+echo "echo "Hello World"" >> test.sh
+
+echo $PATH
+echo "export PATH=$PATH:/dir" >> ~/.bashrc
+source ~/.bashrc
+test.sh
