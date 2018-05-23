@@ -1,5 +1,5 @@
 def add_tags(tag, sti):
-    result = "<" + tag + ">" + sti + "<" + tag + ">"
+    result = "<" + tag + ">" + sti + "</" + tag + ">"
     return result
 
 st = input("Enter word: ")
