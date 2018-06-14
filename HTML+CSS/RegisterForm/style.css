@@ -1,0 +1,119 @@
+body {
+    margin: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    background-color: dodgerblue;
+}
+
+
+/**************** HEADER and FOOTER ****************/
+
+header {
+    background-color: #444;
+    color: white;
+    overflow: hidden;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    text-align: center;
+}
+
+
+/**************** NAVIGATION BAR ****************/
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    text-decoration: none;
+    padding: 15px;
+    color: white;
+    display: block;
+    text-align: center;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 110px;
+}
+
+.dropdown-content a {
+    color: black;
+    text-align: left;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+li a:hover {
+    background-color: red;
+}
+
+
+/**************** FORM ****************/
+
+.main_container {
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.login-container {
+    display: inline-block;
+    padding: 15px;
+}
+
+.login-form input {
+    padding: 10px;
+    display: block;
+    text-align: center;
+    margin-bottom: 10%;
+    border-radius: 5px;
+    border: 1px solid rgb(214, 54, 54);
+}
+
+.login-form input:focus {
+    outline: none;
+    box-shadow: 0px 0px 3px rgb(255, 0, 0);
+    border: 1px solid rgb(250, 0, 0);
+}
+
+.button {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 6px;
+    margin-top: 10%;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    float: right;
+}
+
+.button:hover {
+    background-color: #f42336;
+}
+
+.agree-box a {
+    font-size: 18px;
+    text-decoration: none;
+}
