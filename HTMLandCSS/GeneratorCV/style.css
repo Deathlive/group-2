@@ -1,0 +1,248 @@
+body,
+p {
+    margin: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.main {
+    background: url(image/Background.jpg) no-repeat;
+    height: 100vh;
+    background-size: cover;
+    background-position: center bottom;
+    background-attachment: fixed;
+}
+
+.main_opacity {
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/*************** CV-IMAGE and TEXT ***************/
+
+.cv_text {
+    float: right;
+    height: 100%;
+    width: 50%;
+}
+
+.cv_text p {
+    display: block;
+    width: 100%;
+    height: 50%;
+    font-size: 2vmin;
+    color: white;
+}
+
+.cv_image {
+    float: left;
+    height: 100%;
+    width: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.img_pos {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -30%);
+}
+
+.img1,
+.img2,
+.img3,
+.img4 {
+    width: 170px;
+    height: 220px;
+    position: absolute;
+}
+
+.img1 {
+    left: -65px;
+    top: 0;
+    z-index: 1;
+}
+
+.img2 {
+    right: 0px;
+    bottom: 0;
+    z-index: 2;
+}
+
+.img3 {
+    bottom: 80px;
+    z-index: 3;
+}
+
+.img4 {
+    left: 150px;
+    z-index: 4;
+}
+
+
+/*************** CONTENT ***************/
+
+.head_content {
+    width: 85%;
+    height: 60%;
+    position: absolute;
+}
+
+.content {
+    height: 100vh;
+}
+
+.content1 {
+    height: 40%;
+    background: #eeeeee;
+    text-align: center;
+    font-size: 5vmin;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.content2 {
+    height: 60%;
+    background: #f7f7f7;
+    text-align: center;
+}
+
+
+/*************** USER NUMBER Content1 ***************/
+
+.number {
+    display: inline-block;
+    width: 25%;
+    overflow: hidden;
+}
+
+.number div {
+    height: 200px;
+    width: 200px;
+    /* height: 17vh;
+    width: 12vw; */
+    border-radius: 50%;
+    border: 3px solid #1c97f3;
+    color: #1c97f3;
+    margin: 10% auto;
+    background-color: white;
+    display: table;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.number p {
+    text-align: center;
+    vertical-align: middle;
+    display: block;
+    color: #41a5f2;
+}
+
+.number div p {
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.number:hover div {
+    border-radius: 50%;
+    background-color: #1c97f3;
+}
+
+.number:hover div,
+.number:hover div p,
+.number:hover p {
+    border-color: #f3af1c;
+    color: #f3af1c;
+}
+
+
+/*************** USER IMAGE Content2 ***************/
+
+.content2_main {
+    height: 70%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    display: inline-block;
+    width: 11%;
+    height: 70%;
+}
+
+.img_div {
+    width: 150px;
+    margin: 0 auto;
+}
+
+.circle_top_overlay,
+.circle_down_overlay {
+    opacity: 0;
+}
+
+.circle_top,
+.circle_down,
+.circle_top_overlay,
+.circle_down_overlay {
+    height: 150px;
+    width: 150px;
+    /* height: 40%;
+    width: 12%; */
+    border-radius: 50%;
+    border: 3px solid #efa11d;
+    background-color: white;
+    position: absolute;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    display: block;
+}
+
+.img_div:hover .circle_top_overlay,
+.img_div:hover .circle_down_overlay {
+    cursor: pointer;
+    border: 3px solid dodgerblue;
+    opacity: 0.8;
+}
+
+.circle_down,
+.circle_down_overlay {
+    top: 80%;
+}
+
+.circle_top:hover,
+.circle_down:hover {
+    border-color: #1c97f3;
+}
+
+
+/*************** BUTTON ***************/
+
+.btn {
+    width: 20vw;
+    height: 10vh;
+    background-color: #23af5f;
+    border: 3px solid #23af5f;
+    color: white;
+    font-size: 3vmin;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: white;
+    color: black;
+}
