@@ -1,0 +1,185 @@
+* {
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+    .number div {
+        height: 200px;
+        width: 200px;
+    }
+    .circle {
+        height: 180px;
+        width: 180px;
+    }
+}
+
+
+/* 
+    ##Device = Laptops, Desktops
+    ##Screen = B/w 1025px to 1280px
+  */
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .number div {
+        height: 180px;
+        width: 180px;
+    }
+    .circle {
+        height: 180px;
+        width: 180px;
+    }
+    .img1,
+    .img2,
+    .img3,
+    .img4 {
+        width: 200px;
+        height: 250px;
+        position: absolute;
+    }
+}
+
+
+/* 
+    ##Device = Tablets, Ipads (portrait)
+    ##Screen = B/w 768px to 1024px
+  */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .number div {
+        height: 150px;
+        width: 150px;
+    }
+    .circle {
+        height: 150px;
+        width: 150px;
+    }
+    .box1:last-child {
+        display: none;
+    }
+    .img1,
+    .img2,
+    .img3,
+    .img4 {
+        width: 150px;
+        height: 200px;
+        position: absolute;
+    }
+}
+
+
+/* 
+    ##Device = Tablets, Ipads (landscape)
+    ##Screen = B/w 768px to 1024px
+  */
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .number div {
+        height: 150px;
+        width: 150px;
+    }
+    .circle {
+        height: 150px;
+        width: 150px;
+    }
+    .img1,
+    .img2,
+    .img3,
+    .img4 {
+        width: 150px;
+        height: 200px;
+        position: absolute;
+    }
+    .box1:last-child {
+        display: none;
+    }
+}
+
+
+/* 
+    ##Device = Low Resolution Tablets, Mobiles (Landscape)
+    ##Screen = B/w 481px to 767px
+  */
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .number div {
+        height: 60px;
+        width: 60px;
+    }
+    .circle {
+        height: 60px;
+        width: 60px;
+    }
+    .number:last-child {
+        display: none;
+    }
+    .box1:last-child,
+    .box2:last-child,
+    .cv_image {
+        display: none;
+    }
+    .cv_text {
+        width: 100%;
+    }
+}
+
+
+/* 
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w 320px to 479px
+  */
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .number div {
+        height: 40px;
+        width: 40px;
+    }
+    .circle {
+        height: 40px;
+        width: 40px;
+    }
+    .number:last-child {
+        display: none;
+    }
+    .box1:last-child,
+    .box2:last-child,
+    .cv_image {
+        display: none;
+    }
+    .cv_text {
+        width: 100%;
+    }
+}
+
+
+/* 
+    ##Screen = 320px to smaller resolution
+  */
+
+@media (max-width:320px) {
+    .number div {
+        height: 40px;
+        width: 40px;
+    }
+    .circle {
+        height: 40px;
+        width: 40px;
+    }
+    .number:last-child {
+        display: none;
+    }
+    .box1:last-child,
+    .box2:last-child,
+    .cv_image {
+        display: none;
+    }
+    .cv_text {
+        width: 100%;
+    }
+}
