@@ -1,0 +1,216 @@
+* {
+    -webkit-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+}
+
+
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+    .round {
+        width: 150px;
+        height: 150px;
+        top: -75px;
+    }
+    .box img {
+        width: 100px;
+        height: 100px;
+        padding: 20px 0px;
+    }
+    .circle {
+        height: 150px;
+        width: 150px;
+    }
+}
+
+
+/* 
+    ##Device = Laptops, Desktops
+    ##Screen = B/w 1025px to 1280px
+  */
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .round {
+        width: 150px;
+        height: 150px;
+        top: -75px;
+    }
+    .box img {
+        width: 100px;
+        height: 100px;
+        padding: 20px 0px;
+    }
+    .circle {
+        height: 150px;
+        width: 150px;
+    }
+}
+
+
+/* 
+    ##Device = Tablets, Ipads (portrait)
+    ##Screen = B/w 768px to 1024px
+  */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .round {
+        width: 100px;
+        height: 100px;
+        top: -50px;
+    }
+    .content1-right {
+        display: none;
+    }
+    .content1-left {
+        text-align: center;
+    }
+    .box img {
+        width: 50px;
+        height: 50px;
+        padding: 20px 0px;
+    }
+    .circle {
+        height: 100px;
+        width: 100px;
+    }
+}
+
+
+/* 
+    ##Device = Tablets, Ipads (landscape)
+    ##Screen = B/w 768px to 1024px
+  */
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .round {
+        width: 100px;
+        height: 100px;
+        top: -50px;
+    }
+    .content1-right {
+        display: none;
+    }
+    .content1-left {
+        text-align: center;
+    }
+    .box img {
+        width: 50px;
+        height: 50px;
+        padding: 20px 0px;
+    }
+    .circle {
+        height: 100px;
+        width: 100px;
+    }
+}
+
+
+/* 
+    ##Device = Low Resolution Tablets, Mobiles (Landscape)
+    ##Screen = B/w 481px to 767px
+  */
+
+@media (min-width: 481px) and (max-width: 767px) {
+    header {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+    .round {
+        width: 80px;
+        height: 80px;
+        top: -40px;
+    }
+    .content1-right {
+        display: none;
+    }
+    .content1-left {
+        text-align: center;
+    }
+    .box img {
+        width: 30px;
+        height: 30px;
+        padding: 20px 0px;
+    }
+    .circle {
+        height: 80px;
+        width: 80px;
+    }
+    .content3-box {
+        flex-wrap: wrap;
+    }
+}
+
+
+/* 
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w 320px to 479px
+  */
+
+@media (min-width: 320px) and (max-width: 480px) {
+    header {
+        display: flex;
+        flex-direction: column;
+    }
+    .round {
+        width: 50px;
+        height: 50px;
+        top: -25px;
+    }
+    .content1-right {
+        display: none;
+    }
+    .content1-left {
+        text-align: center;
+    }
+    .box img {
+        width: 30px;
+        height: 30px;
+        padding: 20px 0px;
+    }
+    .circle {
+        height: 50px;
+        width: 50px;
+    }
+    .content3-box {
+        flex-wrap: wrap;
+    }
+}
+
+
+/* 
+    ##Screen = 320px to smaller resolution
+  */
+
+@media (max-width:320px) {
+    header {
+        display: flex;
+        flex-direction: column;
+    }
+    .round {
+        width: 50px;
+        height: 50px;
+        top: -25px;
+    }
+    .content1-right {
+        display: none;
+    }
+    .content1-left {
+        text-align: center;
+    }
+    .box img {
+        width: 30px;
+        height: 30px;
+        padding: 20px 0px;
+    }
+    .circle {
+        height: 50px;
+        width: 50px;
+    }
+    .content3-box {
+        flex-wrap: wrap;
+    }
+}
