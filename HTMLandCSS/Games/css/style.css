@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 
 
@@ -30,7 +30,7 @@ header {
     position: fixed;
     left: 0;
     top: 0;
-    width: 100vw;
+    width: 100%;
     text-align: center;
     display: flex;
     justify-content: space-between;
@@ -54,10 +54,6 @@ footer {
     align-items: center;
 }
 
-.main {
-    height: 100vh;
-}
-
 
 /* Nav Bar */
 
@@ -79,11 +75,6 @@ li a {
 
 li a:hover {
     background-color: red;
-}
-
-header div ul li a {
-    font-size: 2vmin;
-    height: 100%;
 }
 
 header .navbar li a i {
@@ -121,11 +112,35 @@ header .soclink li a:hover i {
     height: 100%;
     color: white;
     text-align: center;
-    font-size: 2vmin;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.main-opacity div {
+    width: 50%;
+    padding-top: 15%;
+    padding-bottom: 15%;
+}
+
+.main-opacity div h1 {
+    color: #FFF;
+    margin-bottom: 1.25rem;
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1.14;
+    letter-spacing: .9px;
+}
+
+.main-opacity div p {
+    font-size: 1.3rem;
+    font-weight: 300;
+    line-height: 130%;
+    color: #fff;
+    margin-bottom: 1.25rem;
 }
 
 
@@ -135,7 +150,6 @@ header .soclink li a:hover i {
     width: 100%;
     height: 40%;
     text-align: center;
-    font-size: 2vmin;
     display: flex;
     justify-content: space-around;
 }
@@ -143,6 +157,7 @@ header .soclink li a:hover i {
 .main-bottom-box {
     width: 25%;
     height: 100%;
+    padding-bottom: 50px;
 }
 
 .round {
@@ -166,12 +181,14 @@ header .soclink li a:hover i {
     position: relative;
     display: flex;
     justify-content: space-around;
-    font-size: 2vmin;
+    flex-wrap: wrap;
 }
 
 .content1-left {
     padding: 20px 0px;
-    width: 30%;
+    overflow: hidden;
+    position: relative;
+    max-width: 320px;
 }
 
 .content1-right {
@@ -179,30 +196,28 @@ header .soclink li a:hover i {
     width: 50%;
 }
 
-.img_pos {
+.img-pos {
     position: relative;
-    width: 500px;
-    height: 500px;
-    left: 20%;
-    top: 50%;
-    transform: translate(-20%, -50%);
+    padding-bottom: 20%;
 }
 
 .img1,
 .img2 {
-    height: 350px;
-    width: 450px;
-    position: absolute;
+    max-width: 90%;
+    display: block;
     filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.5));
 }
 
 .img1 {
+    position: relative;
     z-index: 10;
 }
 
 .img2 {
-    left: 200px;
-    bottom: 20px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    max-height: 90%;
     z-index: 20;
 }
 
@@ -219,6 +234,7 @@ header .soclink li a:hover i {
     margin: 0 15%;
     text-align: center;
     color: black;
+    font-weight: 500;
 }
 
 .content2-box {
@@ -229,7 +245,6 @@ header .soclink li a:hover i {
     justify-content: center;
     align-items: baseline;
     align-content: center;
-    font-size: 2vmin;
 }
 
 .content2-box p {
@@ -267,16 +282,17 @@ header .soclink li a:hover i {
     background-color: white;
     margin: 0 15%;
     text-align: center;
-    font-size: 18px;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .content3-box {
     width: 100%;
     background-color: white;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: flex-start;
+    align-items: baseline;
+    align-content: center;
 }
 
 .content3-box p {
@@ -295,8 +311,7 @@ header .soclink li a:hover i {
 }
 
 .content3-padding {
-    padding: 10px 40px;
-    font-size: 2vmin;
+    padding: 10px 15px;
 }
 
 .content3-quote {
@@ -330,7 +345,6 @@ header .soclink li a:hover i {
 
 .content4-text {
     text-align: center;
-    font-size: 18px;
     margin: 0 15%;
     color: white;
     text-shadow: 3px 3px 3px black;
@@ -346,11 +360,12 @@ header .soclink li a:hover i {
     justify-content: center;
     align-items: center;
     padding: 100px 0px;
+    font-weight: 500;
 }
 
 .item-form {
     width: 600px;
-    height: 465px;
+    height: 500px;
     padding: 20px;
     background-color: white;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
@@ -415,4 +430,22 @@ header,
 .content3,
 footer {
     /* display: none; */
+}
+
+
+/* Text Font */
+
+header,
+.main-opacity,
+.main-bottom,
+.content1,
+.content2-box,
+.content2-text,
+.content3-text,
+.content3-padding,
+.content4-text,
+.main-form {
+    font-size: 1.6vmax;
+    line-height: 25px;
+    word-wrap: break-word;
 }
