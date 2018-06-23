@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/x-icon" href="image/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="plugin/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="plugin/fontawesome/css/font-awesome.css">
+    <script type="text/javascript" src="javascript/jquery.js"></script>
+    <script type="text/javascript" src="javascript/script.js" async></script>
+    <script type="text/javascript" src="plugin/bootstrap/js/bootstrap.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark" style="padding: 0px;">
+        <div class="container-fluid justify-content-center">
+            <div class="navbar-header">
+                <h1 class="text-right navbar-brand" id="hname"></h1>
+                <h1 class="text-left navbar-brand" id="hlname"></h1>
+            </div>
+        </div>
+    </nav>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalCenterTitle">
+        <div class="modal-dialog modal-dialog-centered animate" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title text-center col-12" id="exampleModalLongTitle">LOGIN</h5>
+                </div>
+
+                <div class="modal-body">
+                    <form class="modal-content animate" id="myform1" action="#">
+                        <div class="container">
+                            <label for="uname"><b>Name</b></label>
+                            <input type="text" placeholder="Enter Name" id="name" required>
+                            <label for="psw"><b>Last Name</b></label>
+                            <input type="text" placeholder="Enter Last Name" id="lname" required>
+                            <div class="gender">
+                                <div class="radio-btn-group">
+                                    <div class="radio">
+                                        <input type="radio" name="radio" value="click_me" checked="checked" id="click_me" />
+                                        <label for="click_me">Male</label>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="radio" value="or_me" id="or_me" />
+                                        <label for="or_me">Female</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="psw">
+                                <label class="checkbox-inline"><input type="checkbox" checked="checked"> Remember me </label>
+                                <button type="submit" id="submit">SUBMIT</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <form class="contform" id="myform2">
+            <h1>Contact Form</h1>
+
+            <div class="contentform">
+                <div id="sendmessage"> Your message has been sent. </div>
+
+                <div class="leftcontact">
+
+                    <div class="form-group">
+                        <p>Name <span>*</span></p>
+                        <span class="icon-case"><i class="fa fa-user"></i></span>
+                        <input type="text" name="prenam" id="prenam" maxlength="22" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <p>Surname<span>*</span></p>
+                        <span class="icon-case"><i class="fa fa-male"></i></span>
+                        <input type="text" name="nam" id="nam" maxlength="22" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <p>Phone number</p>
+                        <span class="icon-case"><i class="fa fa-phone"></i></span>
+                        <input type="text" name="phone" id="phone" maxlength="18" />
+                    </div>
+
+                </div>
+
+                <div class="rightcontact">
+
+                    <div class="form-group">
+                        <p>City <span>*</span></p>
+                        <span class="icon-case"><i class="fa fa-building-o"></i></span>
+                        <input type="text" name="ville" id="ville" maxlength="22" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <p>Address <span>*</span></p>
+                        <span class="icon-case"><i class="fa fa-location-arrow"></i></span>
+                        <input type="text" name="adresse" id="adresse" maxlength="22" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <p>Postcode</p>
+                        <span class="icon-case"><i class="fa fa-map-marker"></i></span>
+                        <input type="text" name="postal" id="postal" maxlength="10" />
+                    </div>
+
+                </div>
+            </div>
+            <button type="submit" id="subBtn" class="btn btn-success btn-block btn-lg" style="margin: 0px; border-radius: 0;">SEND</button>
+
+        </form>
+    </div>
+    <div id="output-box">
+        <div class="container bg-dark justify-content-center flex-row">
+            <div class="row">
+                <div id="table-box" class="col-xs-8 col-sm-12 col-lg-12">
+                    <table class="table table-hover">
+                        <tr>
+                            <td>Name:</td>
+                            <td id="name1"></td>
+                        </tr>
+                        <tr>
+                            <td>Surname:</td>
+                            <td id="name2"></td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td>
+                            <td id="phonenum"></td>
+                        </tr>
+                        <tr>
+                            <td>City:</td>
+                            <td id="citi"></td>
+                        </tr>
+                        <tr>
+                            <td>Address:</td>
+                            <td id="addr"></td>
+                        </tr>
+                        <tr>
+                            <td>Postcode:</td>
+                            <td id="postcod"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p class="text-center">© - All rights reserved</p>
+    </footer>
+</body>
+
+</html>
