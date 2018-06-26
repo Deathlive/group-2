@@ -257,13 +257,29 @@ i {
 
 /* Output */
 
-#output-box {
+#resultBox {
+    padding: 0px;
     margin-bottom: 100px;
-    display: none;
+    justify-content: center;
+    /* display: none; */
 }
 
 #table-box {
-    display: none;
     background-color: lavender;
     border-radius: 5px;
+}
+
+#rowBox {
+    width: 380px;
+    padding: 10px;
+    margin: 0px;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+td {
+    word-wrap: break-word;
 }

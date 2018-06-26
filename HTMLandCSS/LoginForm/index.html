@@ -7,19 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" type="image/x-icon" href="image/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="plugin/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="plugin/fontawesome/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <script type="text/javascript" src="javascript/jquery.js"></script>
-    <script type="text/javascript" src="javascript/script.js" async></script>
     <script type="text/javascript" src="plugin/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="javascript/script.js" async></script>
 </head>
 
 <body>
     <nav class="navbar navbar-dark bg-dark" style="padding: 0px;">
         <div class="container-fluid justify-content-center">
             <div class="navbar-header">
-                <h1 class="text-right navbar-brand" id="hname"></h1>
-                <h1 class="text-left navbar-brand" id="hlname"></h1>
+                <p class="navbar-brand" id="title"></p>
+                <p class="navbar-brand" id="hname"></p>
+                <p class="navbar-brand" id="hlname"></p>
             </div>
         </div>
     </nav>
@@ -86,7 +87,7 @@
                     <div class="form-group">
                         <p>Phone number</p>
                         <span class="icon-case"><i class="fa fa-phone"></i></span>
-                        <input type="text" name="phone" id="phone" maxlength="18" />
+                        <input type="number" name="phone" id="phone" maxlength="18" />
                     </div>
 
                 </div>
@@ -108,7 +109,7 @@
                     <div class="form-group">
                         <p>Postcode</p>
                         <span class="icon-case"><i class="fa fa-map-marker"></i></span>
-                        <input type="text" name="postal" id="postal" maxlength="10" />
+                        <input type="number" name="postal" id="postal" maxlength="10" />
                     </div>
 
                 </div>
@@ -117,40 +118,7 @@
 
         </form>
     </div>
-    <div id="output-box">
-        <div class="container bg-dark justify-content-center flex-row">
-            <div class="row">
-                <div id="table-box" class="col-xs-8 col-sm-12 col-lg-12">
-                    <table class="table table-hover">
-                        <tr>
-                            <td>Name:</td>
-                            <td id="name1"></td>
-                        </tr>
-                        <tr>
-                            <td>Surname:</td>
-                            <td id="name2"></td>
-                        </tr>
-                        <tr>
-                            <td>Phone:</td>
-                            <td id="phonenum"></td>
-                        </tr>
-                        <tr>
-                            <td>City:</td>
-                            <td id="citi"></td>
-                        </tr>
-                        <tr>
-                            <td>Address:</td>
-                            <td id="addr"></td>
-                        </tr>
-                        <tr>
-                            <td>Postcode:</td>
-                            <td id="postcod"></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="resultBox" class="container bg-dark flex-wrap flex-row"></div>
     <footer>
         <p class="text-center">© - All rights reserved</p>
     </footer>
