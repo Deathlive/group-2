@@ -141,6 +141,7 @@ btn2 {
 
 .bg-how {
     background: url(../image/profile/how-1.jpg) no-repeat;
+    background-size: cover;
     height: 232px;
 }
 
@@ -166,6 +167,7 @@ btn2 {
 
 .choose-content {
     background: url(../image/bg-1.png);
+    background-size: cover;
     background-color: #353432;
 }
 
@@ -235,6 +237,7 @@ btn2 {
 
 .our-group-bg {
     background: url(../image/profile/prof-1.jpg) no-repeat;
+    background-size: cover;
     height: 248px;
 }
 
@@ -287,14 +290,8 @@ btn2 {
     text-transform: uppercase;
 }
 
-.main-img img {
-    max-width: 100%;
-    height: 512px;
-}
-
-.img-bloc img {
-    max-width: 100%;
-    height: 248px;
+.our-box img {
+    vertical-align: text-top;
 }
 
 
@@ -302,6 +299,7 @@ btn2 {
 
 .testimonial {
     background: url(../image/bg-2.png);
+    background-size: cover;
     background-color: #1496d2;
 }
 
@@ -312,6 +310,12 @@ btn2 {
     font-weight: 300;
     line-height: 24.16px;
     text-transform: uppercase;
+}
+
+.test-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .test-img img {
