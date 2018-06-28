@@ -189,6 +189,7 @@ btn2 {
     color: #ffffff;
     font-weight: 400;
     text-transform: uppercase;
+    font-size: 13px;
 }
 
 
@@ -262,6 +263,7 @@ btn2 {
 .our-group-bg {
     background: url(../image/profile/prof-1.jpg) no-repeat;
     background-size: cover;
+    background-position: center;
     height: 248px;
 }
 
@@ -312,8 +314,13 @@ btn2 {
     text-transform: uppercase;
 }
 
-.our-box img {
-    vertical-align: text-top;
+.main-img img {
+    width: 100%;
+}
+
+.img-bloc img {
+    width: 100%;
+    margin-bottom: 12%;
 }
 
 
@@ -431,7 +438,7 @@ btn2 {
     margin: 25px 0px;
     text-align: center;
     color: #ffffff;
-    font-size: 2vmax;
+    font-size: 25px;
     font-weight: 300;
     line-height: 34px;
     text-transform: uppercase;
@@ -470,6 +477,20 @@ btn2 {
     line-height: 30px;
     text-decoration: none;
     margin: 0 10px;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .counter-row>div {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .counter-row>div {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
 }
 
 
